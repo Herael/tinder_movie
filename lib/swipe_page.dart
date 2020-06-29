@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'buttons_row.dart';
+import 'card_section_alignment.dart';
 
 class SwipePage extends StatelessWidget {
   @override
@@ -29,11 +30,7 @@ class SwipePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.amber,
-          ),
+          CardsSectionAlignment(context),
           buttonsRow()
         ],
       ),

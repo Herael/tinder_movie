@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'buttons_row.dart';
-import 'card_section_alignment.dart';
+import '../widgets/card_carousel.dart';
+import '../widgets/buttons_row.dart';
 
-class SwipePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +30,8 @@ class SwipePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          CardsSectionAlignment(context),
-          buttonsRow()
+          CardCarousel(),
+          ButtonsRow(),
         ],
       ),
     );

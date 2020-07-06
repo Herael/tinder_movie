@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'swipe_page.dart';
+import 'package:tindermovie/screens/home_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SwipePage(),
+      home: HomeScreen(),
     );
   }
 }

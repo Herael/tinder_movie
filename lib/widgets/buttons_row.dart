@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ButtonsRow extends StatelessWidget {
+
+  final Function onLikePress;
+
+  const ButtonsRow({
+    Key key,
+    this.onLikePress,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,7 +18,7 @@ class ButtonsRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           GestureDetector(
-            onTap: () {},
+            onTap: () => onLikePress(),
             child: Material(
               color: Colors.transparent,
               shape:
@@ -26,7 +34,7 @@ class ButtonsRow extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () => onLikePress(),
             child: Material(
               color: Colors.transparent,
               shape:

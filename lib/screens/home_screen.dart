@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import '../widgets/card_carousel.dart';
-import '../widgets/buttons_row.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +35,6 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           CardCarousel(),
-          ButtonsRow(),
         ],
       ),
     );

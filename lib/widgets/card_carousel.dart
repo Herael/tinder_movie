@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tindermovie/models/movie.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 import 'package:tindermovie/widgets/card_content.dart';
 
 class CardCarousel extends StatefulWidget {
+  final List<Movie> movies;
+
+  const CardCarousel({
+    Key key,
+    this.movies,
+  }) : super(key: key);
+
   @override
   _CardCarouselState createState() => _CardCarouselState();
 }
@@ -24,6 +32,8 @@ class _CardCarouselState extends State<CardCarousel> {
       _carouselController.nextPage();
     }
 
+    print(widget.movies);
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -34,7 +44,7 @@ class _CardCarouselState extends State<CardCarousel> {
               height: 520.0,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
-            items: [1, 2, 3, 4, 5].map((i) {
+            items: widget.movies.map((movie) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -54,10 +64,10 @@ class _CardCarouselState extends State<CardCarousel> {
                     child: Column(
                       children: [
                         CardContent(
-                          cardTitle: "Amélie Poulain",
+                          cardTitle: movie.title,
                           cover: "res/amelie.jpg",
-                          date: "20/06/2019",
-                          rate: "6.1",
+                          date: movie.date,
+                          rate: movie.rate,
                         ),
                       ],
                     ),

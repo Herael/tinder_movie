@@ -1,12 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:tindermovie/api/index.dart';
+import 'package:tindermovie/models/movie.dart';
 import '../widgets/card_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
+  HomeScreen({Key key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Movie> movies;
+
+  @override
+  void initState() {
+    super.initState();
+    Api.fetchMovies().then((data) => setState(() {
+          movies = data;
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          CardCarousel(),
+          CardCarousel(movies: movies),
         ],
       ),
     );
   }
 }
-

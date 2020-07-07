@@ -65,7 +65,7 @@ class _CardCarouselState extends State<CardCarousel> {
                       children: [
                         CardContent(
                           cardTitle: movie.title,
-                          cover: "res/amelie.jpg",
+                          cover: movie.cover,
                           date: movie.date,
                           rate: movie.rate,
                         ),

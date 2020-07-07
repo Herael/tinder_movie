@@ -19,7 +19,7 @@ class CardContent extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Image.asset(cover, height: 400, width: 400),
+          Image.network(cover, height: 400, width: 400),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

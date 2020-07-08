@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/screens/detail_movie_screen.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 import 'package:tindermovie/widgets/card_content.dart';
+
 
 class CardCarousel extends StatefulWidget {
   final List<Movie> movies;
@@ -21,7 +23,6 @@ class _CardCarouselState extends State<CardCarousel> {
 
   @override
   Widget build(BuildContext context) {
-
     void _handleLikePress() {
       print("test");
       _carouselController.nextPage();
@@ -30,6 +31,10 @@ class _CardCarouselState extends State<CardCarousel> {
     void _handleDislikePress() {
       print("test");
       _carouselController.nextPage();
+    }
+
+    void _goTo(BuildContext context, String name, {dynamic argument}) {
+      Navigator.of(context).pushNamed(name, arguments: argument);
     }
 
     print(widget.movies);
@@ -47,29 +52,32 @@ class _CardCarouselState extends State<CardCarousel> {
             items: widget.movies.map((movie) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Container(
-                    margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x1a000000),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(-10, 10),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        CardContent(
-                          cardTitle: movie.title,
-                          cover: movie.cover,
-                          date: movie.date,
-                          rate: movie.rate,
-                        ),
-                      ],
+                  return GestureDetector(
+                    onTap: () => _goTo(context, DetailMovieScreen.routeName, argument: movie),
+                    child: Container(
+                      margin: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x1a000000),
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            offset: Offset(-10, 10),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          CardContent(
+                            cardTitle: movie.title,
+                            cover: movie.cover,
+                            date: movie.date,
+                            rate: movie.rate,
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

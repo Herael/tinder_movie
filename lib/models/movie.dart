@@ -8,6 +8,17 @@ class Movie {
 
   Movie({this.id, this.title, this.cover, this.description, this.date, this.rate});
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'cover': cover,
+      'description': description,
+      'date': date,
+      'rate': rate,
+    };
+  }
+
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       id: json['id'].toString(),

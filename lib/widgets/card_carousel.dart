@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/screens/movie_detail_screen.dart';
+import 'package:tindermovie/utils/database.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 import 'package:tindermovie/widgets/card_content.dart';
 
@@ -22,17 +24,25 @@ class _CardCarouselState extends State<CardCarousel> {
   @override
   Widget build(BuildContext context) {
 
-    void _handleLikePress() {
-      print("test");
+    void handleLikePress() {
+      _carouselController.nextPage();
+      DatabaseUtil.addMovieToFavorite(widget.movies[0]);
+    }
+
+    void handleDislikePress() {
       _carouselController.nextPage();
     }
 
-    void _handleDislikePress() {
-      print("test");
-      _carouselController.nextPage();
+    void handleUndoPress(){
+      _carouselController.previousPage();
     }
 
-    print(widget.movies);
+    void handleMovieDetailPress() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MovieDetailScreen()),
+      );
+    }
 
     return Container(
       child: Column(
@@ -41,10 +51,10 @@ class _CardCarouselState extends State<CardCarousel> {
             carouselController: _carouselController,
             options: CarouselOptions(
               carouselController: _carouselController,
-              height: 520.0,
+              height: 550.0,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
-            items: widget.movies.map((movie) {
+            items: widget.movies != null ? widget.movies.map((movie) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -55,9 +65,9 @@ class _CardCarouselState extends State<CardCarousel> {
                       boxShadow: [
                         BoxShadow(
                           color: Color(0x1a000000),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(-10, 10),
+                          blurRadius: 15,
+                          spreadRadius: 5,
+                          offset: Offset(0, 0),
                         ),
                       ],
                     ),
@@ -68,15 +78,16 @@ class _CardCarouselState extends State<CardCarousel> {
                           cover: movie.cover,
                           date: movie.date,
                           rate: movie.rate,
+                          onTap: handleMovieDetailPress,
                         ),
                       ],
                     ),
                   );
                 },
               );
-            }).toList(),
+            }).toList() : null,
           ),
-          ButtonsRow(onLikePress: _handleLikePress)
+          ButtonsRow(onUndoPress: handleUndoPress, onLikePress: handleLikePress, ),
         ],
       ),
     );

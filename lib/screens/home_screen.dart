@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tindermovie/api/index.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/screens/favorites_screen.dart';
 import '../widgets/card_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
     Api.fetchMovies().then((data) => setState(() {
           movies = data;
         }));
+  }
+
+  void handleFavoritesPress() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FavoritesScreen()),
+    );
   }
 
   @override
@@ -42,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: handleFavoritesPress,
             icon: Icon(Icons.star, color: Colors.grey),
           ),
         ],

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/widgets/rounded_button.dart';
 
 class ButtonsRow extends StatelessWidget {
 
+  final Function onUndoPress;
   final Function onLikePress;
 
   const ButtonsRow({
     Key key,
+    this.onUndoPress,
     this.onLikePress,
   }) : super(key: key);
 
@@ -17,38 +21,10 @@ class ButtonsRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          GestureDetector(
-            onTap: () => onLikePress(),
-            child: Material(
-              color: Colors.transparent,
-              shape:
-                  CircleBorder(side: BorderSide(color: Colors.black12, width: 10)),
-              child: Padding(
-                padding: EdgeInsets.all(30.0),
-                child: Icon(
-                  Icons.cancel,
-                  color: Colors.red,
-                  size: 50,
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => onLikePress(),
-            child: Material(
-              color: Colors.transparent,
-              shape:
-              CircleBorder(side: BorderSide(color: Colors.black12, width: 10)),
-              child: Padding(
-                padding: EdgeInsets.all(30.0),
-                child: Icon(
-                  Icons.favorite,
-                  color: Colors.green,
-                  size: 50,
-                ),
-              ),
-            ),
-          ),
+          RoundedButton(onTap: onUndoPress, color: Colors.blue, icon: Icons.undo, iconSize: 25, padding: 20.0),
+          RoundedButton(onTap: onLikePress, color: Colors.red, icon: Icons.close, iconSize: 50, padding: 30),
+          RoundedButton(onTap: onLikePress, color: Colors.green, icon: Icons.favorite, iconSize: 50, padding: 30),
+          RoundedButton(onTap: onLikePress, color: Colors.orange, icon: Icons.info, iconSize: 25, padding: 20.0),
         ],
       ),
     );

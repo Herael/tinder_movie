@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tindermovie/screens/home_screen.dart';
+import 'package:tindermovie/utils/database.dart';
 import 'screens/home_screen.dart';
 
 void main() => runApp(MyApp());

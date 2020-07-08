@@ -24,7 +24,7 @@ class Movie {
       id: json['id'].toString(),
       title: json['title'].toString(),
       cover: "https://image.tmdb.org/t/p/w500" + json['poster_path'].toString(),
-      description: json['description'].toString(),
+      description: json['overview'].toString(),
       date: json['release_date'].toString(),
       rate: json['vote_average'].toString(),
     );

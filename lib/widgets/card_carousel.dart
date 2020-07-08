@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/screens/detail_movie_screen.dart';
 import 'package:tindermovie/screens/movie_detail_screen.dart';
 import 'package:tindermovie/utils/database.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 import 'package:tindermovie/widgets/card_content.dart';
+
 
 class CardCarousel extends StatefulWidget {
   final List<Movie> movies;
@@ -24,7 +26,9 @@ class _CardCarouselState extends State<CardCarousel> {
   @override
   Widget build(BuildContext context) {
 
+
     void handleLikePress() {
+      print("test");
       _carouselController.nextPage();
       DatabaseUtil.addMovieToFavorite(widget.movies[0]);
     }
@@ -37,11 +41,8 @@ class _CardCarouselState extends State<CardCarousel> {
       _carouselController.previousPage();
     }
 
-    void handleMovieDetailPress() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MovieDetailScreen()),
-      );
+    void handleMovieDetailPress(Movie movie) {
+      Navigator.of(context).pushNamed(DetailMovieScreen.routeName, arguments: movie);
     }
 
     return Container(
@@ -78,7 +79,7 @@ class _CardCarouselState extends State<CardCarousel> {
                           cover: movie.cover,
                           date: movie.date,
                           rate: movie.rate,
-                          onTap: handleMovieDetailPress,
+                          onTap: () => handleMovieDetailPress(movie),
                         ),
                       ],
                     ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
+import 'package:tindermovie/models/movie.dart';
 
 class CardContent extends StatelessWidget {
   final String cardTitle;

@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
 import 'package:tindermovie/utils/database.dart';
 import 'package:tindermovie/widgets/card_carousel.dart';
 
-class FavoritesScreen extends StatefulWidget {
-  @override
-  _FavoritesScreenState createState() => _FavoritesScreenState();
-}
-
-class _FavoritesScreenState extends State<FavoritesScreen> {
-  List<Movie> movies;
-
-  @override
-  void initState() {
-    super.initState();
-    DatabaseUtil.getFavoritesMovies().then((data) => setState(() {
-      movies = data;
-      print(movies);
-    }));
-  }
+class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FavoritesBloc favoritesBloc = Provider.of<FavoritesBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -41,7 +30,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          CardCarousel(movies: movies),
+          CardCarousel(movies: favoritesBloc.favorites),
         ],
       ),
     );

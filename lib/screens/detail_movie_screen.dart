@@ -34,89 +34,72 @@ class DetailMovieScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: DraggableScrollableSheet(
-          initialChildSize: 1.0,
-          minChildSize: 1.0,
-          builder: (context, scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                children: <Widget>[
-                  Image.network(movie.cover, width: double.infinity, height: 550),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Wrap(
-                      children: [
-                        Text(
-                          movie.title,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.oswald(fontSize: 20),
-                        ),
-                      ],
+      body: Column(
+        children: <Widget>[
+          Image.network(movie.cover, width: double.infinity, height: 550),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Wrap(
+              children: [
+                Text(
+                  movie.title,
+                  style: GoogleFonts.oswald(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  children: [
+                    Text(
+                      movie.rate,
+                      style: GoogleFonts.openSansCondensed(fontSize: 15),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Row(
-                          children: [
-                            Text(
-                              movie.rate,
-                              style:
-                                  GoogleFonts.openSansCondensed(fontSize: 15),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Icon(
-                                Icons.star,
-                                color: Colors.orange,
-                                size: 15,
-                              ),
-                            ),
-                          ],
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.orange,
+                        size: 15,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Row(
-                          children: [
-                            Text(
-                              movie.date,
-                              style:
-                                  GoogleFonts.openSansCondensed(fontSize: 15),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Icon(
-                                Icons.calendar_today,
-                                color: Colors.orange,
-                                size: 15,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25),
-                    child: Text(
-                      movie.description,
-                      style: GoogleFonts.quicksand(fontSize: 14),
-                      textAlign: TextAlign.justify,
                     ),
-                  ),
-                  ButtonsRow(),
-                ],
+                  ],
+                ),
               ),
-            );
-          },
-        ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  children: [
+                    Text(
+                      movie.date,
+                      style: GoogleFonts.openSansCondensed(fontSize: 15),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Icon(
+                        Icons.calendar_today,
+                        color: Colors.orange,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25),
+            child: Text(
+              movie.description,
+              style: GoogleFonts.quicksand(fontSize: 14),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ],
       ),
     );
   }

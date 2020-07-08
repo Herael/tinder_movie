@@ -20,7 +20,7 @@ class FavoritesScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
         ),
         title: const Text(
-          "Description",
+          "Favorites",
           style: TextStyle(
             color: Colors.deepOrangeAccent,
           ),

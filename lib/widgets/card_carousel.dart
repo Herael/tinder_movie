@@ -9,10 +9,12 @@ import 'package:tindermovie/widgets/card_content.dart';
 
 class CardCarousel extends StatefulWidget {
   final List<Movie> movies;
+  final Function refreshMovies;
 
   const CardCarousel({
     Key key,
     this.movies,
+    this.refreshMovies,
   }) : super(key: key);
 
   @override
@@ -33,12 +35,25 @@ class _CardCarouselState extends State<CardCarousel> {
       setState(() {
         if(activeCarouselIndex < widget.movies.length - 1) {
           activeCarouselIndex++;
+        } else {
+          _carouselController.jumpToPage(0);
+          activeCarouselIndex = 0;
+          widget.refreshMovies();
         }
       });
     }
 
     void handleDislikePress() {
       _carouselController.nextPage();
+      setState(() {
+        if (activeCarouselIndex < widget.movies.length - 1) {
+          activeCarouselIndex++;
+        } else {
+          _carouselController.jumpToPage(0);
+          activeCarouselIndex = 0;
+          widget.refreshMovies();
+        }
+      });
     }
 
     void handleUndoPress() {

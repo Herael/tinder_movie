@@ -15,6 +15,7 @@ class DetailMovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -32,6 +33,12 @@ class DetailMovieScreen extends StatelessWidget {
             color: Colors.deepOrangeAccent,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => {},
+            icon: Icon(Icons.star_border, color: Colors.orange),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -43,7 +50,7 @@ class DetailMovieScreen extends StatelessWidget {
               controller: scrollController,
               child: Column(
                 children: <Widget>[
-                  Image.network(movie.cover, width: double.infinity, height: 550),
+                  Image.network(movie.cover, height: height * 0.7),
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: Wrap(

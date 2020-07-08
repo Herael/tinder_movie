@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tindermovie/api/index.dart';
 import 'package:tindermovie/models/movie.dart';
@@ -19,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Api.fetchMovies().then((data) => setState(() {
+    Api.fetchMovies(1).then((data) => setState(() {
           movies = data;
         }));
   }
@@ -31,6 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void refreshMovies(){
+    Api.fetchMovies(next(0, 500)).then((data) => setState(() {
+      movies = data;
+    }));
+  }
+
+  final _random = new Random();
+  int next(int min, int max) => min + _random.nextInt(max - min);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.settings, color: Colors.grey),
-        ),
         title: const Text(
           "Tinder Movie",
           style: TextStyle(
@@ -51,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
             onPressed: handleFavoritesPress,
-            icon: Icon(Icons.star, color: Colors.grey),
+            icon: Icon(Icons.apps, color: Colors.grey, size: 35),
           ),
         ],
       ),
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          CardCarousel(movies: movies),
+          CardCarousel(movies: movies, refreshMovies: refreshMovies),
         ],
       ),
     );

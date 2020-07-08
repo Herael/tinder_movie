@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/foundation.dart';
+
+@JsonSerializable(nullable: false)
 class Movie {
   final String id;
   final String title;

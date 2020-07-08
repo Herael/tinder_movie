@@ -116,6 +116,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+  json_annotation:
+    dependency: "direct main"
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  localstorage:
+    dependency: "direct main"
+    description:
+      name: localstorage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2+5"
   matcher:
     dependency: transitive
     description:

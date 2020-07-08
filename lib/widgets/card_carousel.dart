@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:tindermovie/models/movie.dart';
 import 'package:tindermovie/screens/detail_movie_screen.dart';
 import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
-import 'package:tindermovie/utils/database.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 import 'package:tindermovie/widgets/card_content.dart';
 

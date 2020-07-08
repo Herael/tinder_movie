@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tindermovie/models/movie.dart';
 import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
-import 'package:tindermovie/utils/database.dart';
 import 'package:tindermovie/widgets/card_carousel.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -28,10 +26,8 @@ class FavoritesScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: <Widget>[
-          CardCarousel(movies: favoritesBloc.favorites),
-        ],
+      body: Wrap(
+          children: favoritesBloc.favorites.map((movie) => Image.network(movie.cover, width: 100)).toList()
       ),
     );
   }

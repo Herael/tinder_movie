@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:path/path.dart';
-import 'package:tindermovie/models/movie.dart';
 
 class CardContent extends StatelessWidget {
   final String cardTitle;
@@ -21,12 +19,13 @@ class CardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () => onTap(),
       child: Container(
         child: Column(
           children: [
-            Image.network(cover, height: 436),
+            Image.network(cover, height: height * 0.592),
             Padding(
               padding: EdgeInsets.all(10),
               child: Wrap(
@@ -34,7 +33,7 @@ class CardContent extends StatelessWidget {
                   Text(
                     cardTitle,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.oswald(fontSize: 20),
+                    style: GoogleFonts.oswald(fontSize: (20 * height) * 0.001),
                   ),
                 ],
               ),
@@ -48,7 +47,7 @@ class CardContent extends StatelessWidget {
                     children: [
                       Text(
                         rate,
-                        style: GoogleFonts.openSansCondensed(fontSize: 15),
+                        style: GoogleFonts.openSansCondensed(fontSize: (15 * height) * 0.001)
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -67,7 +66,7 @@ class CardContent extends StatelessWidget {
                     children: [
                       Text(
                         date,
-                        style: GoogleFonts.openSansCondensed(fontSize: 15),
+                        style: GoogleFonts.openSansCondensed(fontSize: (15 * height) * 0.001)
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),

@@ -31,7 +31,9 @@ class _CardCarouselState extends State<CardCarousel> {
       _carouselController.nextPage();
       favoritesBloc.addFavorite(widget.movies[activeCarouselIndex]);
       setState(() {
-        activeCarouselIndex++;
+        if(activeCarouselIndex < widget.movies.length - 1) {
+          activeCarouselIndex++;
+        }
       });
     }
 
@@ -41,12 +43,19 @@ class _CardCarouselState extends State<CardCarousel> {
 
     void handleUndoPress() {
       _carouselController.previousPage();
+      setState(() {
+        if(activeCarouselIndex > 0) {
+          activeCarouselIndex--;
+        }
+      });
     }
 
     void handleMovieDetailPress(Movie movie) {
       Navigator.of(context)
           .pushNamed(DetailMovieScreen.routeName, arguments: movie);
     }
+
+    double height = MediaQuery.of(context).size.height;
 
     return Container(
       child: Column(
@@ -56,7 +65,7 @@ class _CardCarouselState extends State<CardCarousel> {
             options: CarouselOptions(
               carouselController: _carouselController,
               enableInfiniteScroll: false,
-              height: 560.0,
+              height: height*0.75,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
             items: widget.movies != null

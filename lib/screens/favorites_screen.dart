@@ -4,7 +4,6 @@ import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
 import 'package:tindermovie/widgets/card_carousel.dart';
 
 class FavoritesScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final FavoritesBloc favoritesBloc = Provider.of<FavoritesBloc>(context);
@@ -15,7 +14,9 @@ class FavoritesScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () { Navigator.pop(context); },
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
         ),
         title: const Text(
@@ -27,7 +28,13 @@ class FavoritesScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Wrap(
-          children: favoritesBloc.favorites.map((movie) => Image.network(movie.cover, width: 100)).toList()
+        children: favoritesBloc.favorites
+            .map(
+              (movie) => Padding(
+                  padding: EdgeInsets.only(left: 3, bottom: 3),
+                  child: Image.network(movie.cover, width: 100)),
+            )
+            .toList(),
       ),
     );
   }

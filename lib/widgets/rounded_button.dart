@@ -19,19 +19,20 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       child: GestureDetector(
         onTap: () => onTap(),
         child: Material(
           color: Colors.transparent,
           shape:
-          CircleBorder(side: BorderSide(color: Colors.black12, width: 10)),
+          CircleBorder(side: BorderSide(color: Colors.black12, width: (10*height)*0.001)),
           child: Padding(
-            padding: EdgeInsets.all(padding),
+            padding: EdgeInsets.all((padding*height)* 0.001),
             child: Icon(
               icon,
               color: color,
-              size: iconSize,
+              size: (iconSize*height)*0.001,
             ),
           ),
         ),

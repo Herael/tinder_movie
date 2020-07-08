@@ -27,16 +27,14 @@ class DetailMovieScreen extends StatelessWidget {
           },
           icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
         ),
-        title: const Text(
-          "Tinder Movie",
-          style: TextStyle(
-            color: Colors.deepOrangeAccent,
-          ),
+        title: Text(
+          "Movie detail",
+          style: GoogleFonts.bebasNeue(fontSize: 30, color: Colors.orange),
         ),
         actions: <Widget>[
           IconButton(
             onPressed: () => {},
-            icon: Icon(Icons.star_border, color: Colors.orange),
+            icon: Icon(Icons.star_border, color: Colors.orange, size: 35),
           ),
         ],
       ),

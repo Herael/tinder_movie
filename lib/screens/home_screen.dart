@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:tindermovie/api/index.dart';
 import 'package:tindermovie/models/movie.dart';
 import 'package:tindermovie/screens/favorites_screen.dart';
+import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
 import '../widgets/card_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Api.fetchMovies(1).then((data) => setState(() {
           movies = data;
         }));
+
   }
 
   void handleFavoritesPress() {
@@ -42,16 +46,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final FavoritesBloc favoritesBloc = Provider.of<FavoritesBloc>(context);
+    favoritesBloc.init();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           "Tinder Movie",
-          style: TextStyle(
-            color: Colors.deepOrangeAccent,
-          ),
+          style: GoogleFonts.bebasNeue(fontSize: 30, color: Colors.orange),
         ),
         actions: <Widget>[
           IconButton(

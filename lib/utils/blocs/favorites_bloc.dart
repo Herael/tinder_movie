@@ -25,6 +25,11 @@ class FavoritesBloc extends ChangeNotifier {
     DatabaseUtil.removeMovieToFavorite(movie);
   }
 
+  void removeAllFavorites(){
+    _favorites = [];
+    DatabaseUtil.removeAll();
+  }
+
   bool isFavorite(Movie movie){
     return _favorites.contains(movie);
   }

@@ -32,6 +32,11 @@ class DatabaseUtil {
     await db.delete('movies', where: 'id = ?', whereArgs: [movie.id]);
   }
 
+  static  Future<void> removeAll() async {
+    final Database db = await openMovieDatabase();
+    await db.delete('movies');
+  }
+
   static Future<List<Movie>> getFavoritesMovies() async {
     final Database db = await openMovieDatabase();
     final List<Map<String, dynamic>> movies = await db.query('movies');

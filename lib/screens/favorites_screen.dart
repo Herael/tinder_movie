@@ -17,6 +17,11 @@ class FavoritesScreen extends StatelessWidget {
           .pushNamed(DetailMovieScreen.routeName, arguments: movie);
     }
 
+    void handleRemoveAllPress() {
+      favoritesBloc.removeAllFavorites();
+      Navigator.pop(context);
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -32,6 +37,12 @@ class FavoritesScreen extends StatelessWidget {
           "Favorites",
           style: GoogleFonts.bebasNeue(fontSize: 30, color: Colors.orange),
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: handleRemoveAllPress,
+            icon: Icon(Icons.delete, color: Colors.grey, size: 35),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -41,19 +52,36 @@ class FavoritesScreen extends StatelessWidget {
           builder: (context, scrollController) {
             return SingleChildScrollView(
               controller: scrollController,
-              child: Wrap(
-                children: favoritesBloc.favorites
-                    .map(
-                      (movie) => GestureDetector(
-                        onTap: () => handleMovieDetailPress(movie),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 3, bottom: 3),
-                          child: Image.network(movie.cover, width: 100),
-                        ),
-                      ),
+              child: favoritesBloc.favorites.length > 0
+                  ? Wrap(
+                      children: favoritesBloc.favorites
+                          .map(
+                            (movie) => GestureDetector(
+                              onTap: () => handleMovieDetailPress(movie),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 3, bottom: 3),
+                                child: Image.network(movie.cover, width: 100),
+                              ),
+                            ),
+                          )
+                          .toList(),
                     )
-                    .toList(),
-              ),
+                  : Padding(
+                      padding: EdgeInsets.all(25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("res/sad_favorites.png", width: 150,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+                            child: Text(
+                              "You don't have favorites, you can discover movies, back to the home screen.",
+                              style: GoogleFonts.openSansCondensed(fontSize: 15),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
             );
           },
         ),

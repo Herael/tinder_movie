@@ -40,7 +40,7 @@ class _CardCarouselState extends State<CardCarousel> {
           BotToast.showCustomNotification(
             toastBuilder: (cancel) {
               return CustomNotification(
-                title: widget.movies[activeCarouselIndex].title,
+                title: widget.movies[activeCarouselIndex - 1].title,
                 icon: Icons.favorite,
                 iconColor: Colors.green,
               );
@@ -62,7 +62,7 @@ class _CardCarouselState extends State<CardCarousel> {
           BotToast.showCustomNotification(
             toastBuilder: (cancel) {
               return CustomNotification(
-                title: widget.movies[activeCarouselIndex].title,
+                title: widget.movies[activeCarouselIndex - 1].title,
                 icon: Icons.close,
                 iconColor: Colors.red,
               );

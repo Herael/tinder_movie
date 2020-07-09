@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
 import 'package:tindermovie/widgets/buttons_row.dart';
 
-class DetailMovieScreen extends StatelessWidget {
+class DetailMovieScreen extends StatefulWidget {
   static const String routeName = "routeDetailMovie";
 
   final Movie movie;
@@ -14,8 +16,42 @@ class DetailMovieScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _DetailMovieScreenState createState() => _DetailMovieScreenState();
+}
+
+class _DetailMovieScreenState extends State<DetailMovieScreen> {
+  bool isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final FavoritesBloc favoritesBloc = Provider.of<FavoritesBloc>(context);
+    if(favoritesBloc.isFavorite(widget.movie)){
+      print("Il est favori");
+      setState(() {
+        isFavorite = true;
+      });
+    } else {
+      print("Il est pas favori");
+      setState(() {
+        isFavorite = false;
+      });
+    }
+
+    void handleStarPress(){
+      if(isFavorite){
+        favoritesBloc.removeFavorite(widget.movie);
+        setState(() {
+          isFavorite = false;
+        });
+      } else {
+        favoritesBloc.addFavorite(widget.movie);
+        setState(() {
+          isFavorite = true;
+        });
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -33,8 +69,8 @@ class DetailMovieScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () => {},
-            icon: Icon(Icons.star_border, color: Colors.orange, size: 35),
+            onPressed: handleStarPress,
+            icon: Icon(isFavorite ? Icons.star : Icons.star_border, color: Colors.orange, size: 35),
           ),
         ],
       ),
@@ -48,13 +84,13 @@ class DetailMovieScreen extends StatelessWidget {
               controller: scrollController,
               child: Column(
                 children: <Widget>[
-                  Image.network(movie.cover, height: height * 0.7),
+                  Image.network(widget.movie.cover, height: height * 0.7),
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: Wrap(
                       children: [
                         Text(
-                          movie.title,
+                          widget.movie.title,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.oswald(fontSize: 20),
                         ),
@@ -69,7 +105,7 @@ class DetailMovieScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              movie.rate,
+                              widget.movie.rate,
                               style:
                                   GoogleFonts.openSansCondensed(fontSize: 15),
                             ),
@@ -90,7 +126,7 @@ class DetailMovieScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              movie.date,
+                              widget.movie.date,
                               style:
                                   GoogleFonts.openSansCondensed(fontSize: 15),
                             ),
@@ -111,7 +147,7 @@ class DetailMovieScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25),
                     child: Text(
-                      movie.description,
+                      widget.movie.description,
                       style: GoogleFonts.quicksand(fontSize: 14),
                       textAlign: TextAlign.justify,
                     ),

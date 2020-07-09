@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Api.fetchMovies(1).then((data) => setState(() {
+    Api.fetchMovies(next(0, 500)).then((data) => setState(() {
           movies = data;
         }));
 

@@ -5,6 +5,7 @@ import 'package:tindermovie/screens/Screen404.dart';
 import 'package:tindermovie/screens/detail_movie_screen.dart';
 import 'package:tindermovie/screens/home_screen.dart';
 import 'package:tindermovie/models/movie.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Tinder-Movie',
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

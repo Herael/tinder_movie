@@ -25,7 +25,7 @@ class CardContent extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            Image.network(cover, height: height * 0.592),
+            Image.network(cover, height: height * 0.489),
             Padding(
               padding: EdgeInsets.all(10),
               child: Wrap(

@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tindermovie/models/movie.dart';
 import 'package:tindermovie/utils/blocs/favorites_bloc.dart';
-import 'package:tindermovie/widgets/card_carousel.dart';
 
 import 'detail_movie_screen.dart';
 
